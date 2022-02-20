@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="normalize.css">
+    <meta name="author" content="Сергей Петров">
+    <link rel="stylesheet" href="./vendor/normalize.css">
+    <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto</title>
 </head>
 
@@ -22,9 +23,9 @@
                     <div class="profile__info">
                         <div class="profile__personal">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
-                            <button type="button" class="profile__edit-button"></button>
+                            <button type="button" data-popup class="profile__edit-button"></button>
                         </div>
-                        <p class="profile__profession">Инженер-проектировщик</p>
+                        <p class="profile__job">Инженер-проектировщик</p>
                     </div>
                 </div>
                 <button type="button" class="profile__add-button"></button>
@@ -80,22 +81,22 @@
             </footer>
         </main>
     </div>
-    <section class="popup popup_edit">
+    <section class="popup popup_edit" aria-label="Модальное окно">
         <div class="popup__container">
-            <button type="button" class="button__close"></button>
+            <button type="button" data-close class="popup__button-close"></button>
             <form action="#" name="form" class="popup__form">
                 <div class="popup__form-container">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <input type="text" name="name" class="popup__input popup__input_name" required
+                    <input type="text" name="name" class="popup__input popup__input_type_name" required
                         placeholder="Введите имя">
-                    <input type="text" name="profession" class="popup__input popup__input_profession" required
+                    <input type="text" name="profession" class="popup__input popup__input_type_job" required
                         placeholder="Введите профессию">
                     <button type="submit" class="popup__submit">Сохранить</button>
                 </div>
             </form>
         </div>
     </section>
-    <script src="script.js"></script>
+    <script src="./scripts/script.js"></script>
 </body>
 
 </html>

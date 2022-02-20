@@ -1,0 +1,6 @@
+.elements__item {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+}

@@ -1,0 +1,15 @@
+.profile__personal {
+  display: flex;
+  justify-content: space-between;
+  margin: 22px 0 8px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 720px) {
+  .profile__personal {
+    padding-left: 47px;
+    justify-content: start;
+    margin-bottom: 6px;
+  }
+}
