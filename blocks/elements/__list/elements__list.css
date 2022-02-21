@@ -11,6 +11,14 @@
   margin: 0 auto 67px;
 }
 
+@media (max-width: 720px) {
+  .elements__list {
+    width: calc(100% - 19px * 2);
+    column-gap: 50px;
+  }
+}
+
+
 @media (max-width: 425px) {
   .elements__list {
     margin-bottom: 48px;

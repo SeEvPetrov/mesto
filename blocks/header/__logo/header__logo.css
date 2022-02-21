@@ -3,15 +3,10 @@
   height: 33px;
 }
 
-@media (max-width: 880px) {
-  .header__logo {
-    margin-left: 27px;
-  }
-}
-
-@media (max-width: 425px) {
+@media (max-width: 720px) {
   .header__logo {
     width: 104px;
     height: 25px;
+    margin-left: 27px;
   }
 }

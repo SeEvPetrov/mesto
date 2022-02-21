@@ -1,11 +1,15 @@
 .popup__submit {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
   color: #fff;
   background-color: #000;
   border: none;
   border-radius: 2px;
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   padding: 0;
+  margin-top: 49px;
   transition: 0.4s ease-in;
   cursor: pointer;
 }
@@ -16,6 +20,9 @@
 
 @media (max-width: 581px) {
   .popup__submit {
-    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+    min-height: 46px;
+    margin-top: 45px;
   }
 }
