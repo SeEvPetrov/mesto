@@ -9,9 +9,17 @@ const popupOpenBtn = document.querySelector(".profile__edit-button"),
   nameInput = document.querySelector(".popup__input_type_name"),
   jobInput = document.querySelector(".popup__input_type_job");
 
+  /* функция которая будет заполнять input данными со страницы */
+function setDataInput () {
+  nameInput.value = userName.textContent; //в input модального окна заносим данные со страницы
+  jobInput.value = userJob.textContent;
+}
+
 /* создаем функцию открытия модального окна */
 function openPopup() {
   popup.classList.add("popup_opened");
+  
+  setDataInput ();
 }
 
 /* функция закрытия модального окна */
@@ -28,14 +36,6 @@ function formSubmitHandler(evt) {
 
   closePopup();
 }
-
-/* функция которая будет заполнять input данными со страницы */
-function setDataInput () {
-  nameInput.value = userName.textContent; //в input модального окна заносим данные со страницы
-  jobInput.value = userJob.textContent;
-}
-
-setDataInput ();
 
 /* обработчик на кнопку открытия модального окна */
 popupOpenBtn.addEventListener("click", openPopup);
