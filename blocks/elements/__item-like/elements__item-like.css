@@ -13,6 +13,4 @@
   opacity: 0.5;
 }
 
-.elements__item-like:active {
-  background: url(../../../images/black_heart.svg) no-repeat center;
-}
+
