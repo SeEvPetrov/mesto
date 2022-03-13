@@ -35,6 +35,7 @@ const popupOpenEdit = document.querySelector(".profile__edit-button"),
   popupZoom = document.querySelector(".popup_zoom"),
   popupZoomImage = document.querySelector(".popup__zoom-image"),
   popupZoomCaption = document.querySelector(".popup__caption"),
+  popupZoomClose = popupZoom.querySelector(".popup__button-close"),
   formElement = document.querySelector(".form-edit"),
   formAdd = document.querySelector(".form-add"),
   userName = document.querySelector(".profile__name"),
@@ -84,8 +85,10 @@ const createCard = (data) => {
 
   fillingCard(cardImage, cardTitle, data);
 
+  openPopupZoomImage(cardImage);
   likeBtn.addEventListener('click', toggleLike);
   deleteBtn.addEventListener('click', deleteCard);
+
 
   return cardElement;
 };
@@ -93,7 +96,7 @@ const createCard = (data) => {
 // наполняем карточку
  const fillingCard = (cardImage, cardTitle, data) => {
   cardImage.src = data.link;
-  cardImage.alt = 'пользовательское фото';
+  cardImage.alt = data.name;
   cardTitle.textContent = data.name;
 };
 
@@ -128,6 +131,17 @@ const formSubmitHandlerAdd = (evt) => {
   closePopup(popupAdd);
 };
 
+const openPopupZoomImage = (cardImage) => {
+  cardImage.addEventListener('click', () => {
+
+    popupZoomImage.src = cardImage.src;
+    popupZoomImage.alt = cardImage.alt;
+    popupZoomCaption.textContent = cardImage.alt;
+
+    openPopup(popupZoom);
+  });
+};
+
 const addingCards = (arr) => {
   arr.forEach((card) => {
     renderCard({
@@ -150,9 +164,12 @@ addingCards(initialCards);
 popupOpenEdit.addEventListener("click", () => openPopup(popupEdit));
 popupOpenAdd.addEventListener("click", () => openPopup(popupAdd));
 
+
 /* обработчик на кнопку закрытия модального окна */
 popupCloseEdit.addEventListener("click", () => closePopup(popupEdit));
 popupCloseAdd.addEventListener("click", () => closePopup(popupAdd));
+popupZoomClose.addEventListener("click", () => closePopup(popupZoom));
+
 
 /* вешаем обработчик на форму */
 formElement.addEventListener("submit", formSubmitHandler);
