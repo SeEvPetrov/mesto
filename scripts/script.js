@@ -46,25 +46,25 @@ const popupOpenEdit = document.querySelector(".profile__edit-button"),
   urlInput = document.querySelector(".popup__input_type_url"),
   cardsContainer = document.querySelector('.elements__list');
 
-/* функция которая будет заполнять input данными со страницы */
+// функция которая будет заполнять input данными со страницы
 function setDataInput() {
   nameInput.value = userName.textContent; //в input модального окна заносим данные со страницы
   jobInput.value = userJob.textContent;
 }
 
-/* создаем функцию открытия модального окна */
+// создаем функцию открытия модального окна
 function openPopup(popup) {
   popup.classList.add("popup_opened");
 
   setDataInput();
 }
 
-/* функция закрытия модального окна */
+// функция закрытия модального окна
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
 }
 
-/* отменим стандартное поведение формы, получаем данные из input */
+// отменим стандартное поведение формы, получаем данные из input
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
@@ -83,7 +83,9 @@ const createCard = (data) => {
   const likeBtn = cardElement.querySelector('.elements__item-like');
   const deleteBtn = cardElement.querySelector('.elements__item-delete');
 
-  fillingCard(cardImage, cardTitle, data);
+  cardImage.src = data.link;
+  cardImage.alt = data.name;
+  cardTitle.textContent = data.name;
 
   openPopupZoomImage(cardImage);
   likeBtn.addEventListener('click', toggleLike);
@@ -93,13 +95,6 @@ const createCard = (data) => {
   return cardElement;
 };
 
-// наполняем карточку
- const fillingCard = (cardImage, cardTitle, data) => {
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-  cardTitle.textContent = data.name;
-};
-
 const renderCard = (data, cardsContainer) => {
   // Создаем карточку на основе данных
   const cardElement = createCard(data);
@@ -107,16 +102,17 @@ const renderCard = (data, cardsContainer) => {
   cardsContainer.prepend(cardElement);
 };
 
-
+// ставим или убираем лайки
 const toggleLike = (evt)  => {
   evt.target.classList.toggle('elements__item-like_active');
 };
 
+// удаляем карточки
 const deleteCard = (evt) => {
   evt.target.closest('.elements__item').remove();
 };
 
-
+// слушатель форму добавления карточки
 const formSubmitHandlerAdd = (evt) => {
   evt.preventDefault();
 
@@ -131,6 +127,7 @@ const formSubmitHandlerAdd = (evt) => {
   closePopup(popupAdd);
 };
 
+// увеличение изображения при клике
 const openPopupZoomImage = (cardImage) => {
   cardImage.addEventListener('click', () => {
 
@@ -142,7 +139,8 @@ const openPopupZoomImage = (cardImage) => {
   });
 };
 
-const addingCards = (arr) => {
+//Добавление карточек на основе массива
+const addCard = (arr) => {
   arr.forEach((card) => {
     renderCard({
       name: card.name,
@@ -151,26 +149,19 @@ const addingCards = (arr) => {
   });
 };
 
-addingCards(initialCards);
+addCard(initialCards);
 
-
-
-
-
-
-
-
-/* обработчик на кнопку открытия модального окна */
+// обработчик на кнопку открытия модального окна
 popupOpenEdit.addEventListener("click", () => openPopup(popupEdit));
 popupOpenAdd.addEventListener("click", () => openPopup(popupAdd));
 
 
-/* обработчик на кнопку закрытия модального окна */
+// обработчик на кнопку закрытия модального окна
 popupCloseEdit.addEventListener("click", () => closePopup(popupEdit));
 popupCloseAdd.addEventListener("click", () => closePopup(popupAdd));
 popupZoomClose.addEventListener("click", () => closePopup(popupZoom));
 
 
-/* вешаем обработчик на форму */
+// вешаем обработчик на форму
 formElement.addEventListener("submit", formSubmitHandler);
 formAdd.addEventListener("submit", formSubmitHandlerAdd);
