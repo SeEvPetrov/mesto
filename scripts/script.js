@@ -95,6 +95,7 @@ const createCard = (data) => {
   return cardElement;
 };
 
+// Добавление карточки на страницу
 const renderCard = (data, cardsContainer) => {
   // Создаем карточку на основе данных
   const cardElement = createCard(data);
@@ -103,7 +104,7 @@ const renderCard = (data, cardsContainer) => {
 };
 
 // ставим или убираем лайки
-const toggleLike = (evt)  => {
+const toggleLike = (evt) => {
   evt.target.classList.toggle('elements__item-like_active');
 };
 
@@ -116,7 +117,7 @@ const deleteCard = (evt) => {
 const formSubmitHandlerAdd = (evt) => {
   evt.preventDefault();
 
-  renderCard ({
+  renderCard({
     name: titleInput.value,
     link: urlInput.value
   }, cardsContainer);
