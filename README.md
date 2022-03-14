@@ -1,4 +1,4 @@
-# Проектная работа №4: "Mesto".
+# Проектная работа: "Mesto".
 Ссылка на мой проект [Mesto](https://seevpetrov.github.io/mesto/)
 ---
 
