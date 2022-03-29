@@ -44,38 +44,55 @@
   <div class="popup popup_edit">
     <div class="popup__container">
       <button type="button" class="popup__button-close"></button>
-      <form action="#" name="form" class="popup__form form-edit">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" name="name" class="popup__input popup__input_type_name" required placeholder="Введите имя"
-          autocomplete="off">
-        <input type="text" name="profession" class="popup__input popup__input_type_job" required
-          placeholder="Введите профессию" autocomplete="off">
-        <button type="submit" class="popup__submit">Сохранить</button>
+      <form action="#" name="formEdit" class="popup__form form-edit" novalidate>
+        <fieldset class="popup__form-set">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <label class="popup__form-field">
+            <input type="text" name="name" id="name" class="popup__input popup__input_type_name" required
+              placeholder="Введите имя" autocomplete="off" minlength="2" maxlength="40">
+            <span class="popup__input-error" id="name-error"></span>
+          </label>
+          <label class="popup__form-field">
+            <input type="text" name="job" id="job" class="popup__input popup__input_type_job" required
+              placeholder="Введите профессию" autocomplete="off" minlength="2" maxlength="200">
+            <span class="popup__input-error" id="job-error"></span>
+          </label>
+          <button type="submit" class="popup__submit popup__submit_type_edit">Сохранить</button>
+        </fieldset>
       </form>
     </div>
   </div>
+
   <!-- модальное окно с добавлением карточки -->
   <div class="popup popup_add">
     <div class="popup__container">
       <button type="button" class="popup__button-close"></button>
-      <form action="#" name="form" class="popup__form form-add">
-        <h2 class="popup__title">Новое место</h2>
-        <input type="text" name="name" class="popup__input popup__input_type_title" required placeholder="Название"
-          autocomplete="off">
-        <input type="text" name="profession" class="popup__input popup__input_type_url" required
-          placeholder="Ссылка на картинку" autocomplete="off">
-        <button type="submit" class="popup__submit">Создать</button>
+      <form action="#" name="formAdd" class="popup__form form-add" novalidate>
+        <fieldset class="popup__form-set">
+          <h2 class="popup__title">Новое место</h2>
+          <label class="popup__form-field">
+            <input type="text" name="title" id="title" class="popup__input popup__input_type_title" required
+              placeholder="Название" autocomplete="off" minlength="2" maxlength="30">
+            <span class="popup__input-error" id="title-error"></span>
+          </label>
+          <label class="popup__form-field">
+            <input type="url" name="link" id="link" class="popup__input popup__input_type_url" required
+              placeholder="Ссылка на картинку" autocomplete="off">
+            <span class="popup__input-error" id="link-error"></span>
+          </label>
+          <button type="submit" class="popup__submit popup__submit_type_add popup__button_disabled">Создать</button>
+        </fieldset>
       </form>
     </div>
   </div>
-  
- <!--модальное окно для увеличения картинки  -->
+
+  <!--модальное окно для увеличения картинки  -->
   <div class="popup popup_zoom">
     <div class="popup__container-photo">
       <button type="button" class="popup__button-close"></button>
       <figure class="popup__image">
-          <img src="#" alt="фото" class="popup__zoom-image">
-          <figcaption class="popup__caption"></figcaption>
+        <img src="#" alt="фото" class="popup__zoom-image">
+        <figcaption class="popup__caption"></figcaption>
       </figure>
     </div>
   </div>
@@ -83,13 +100,13 @@
   <!-- заготовленая карточка -->
   <template class="card">
     <li class="elements__item">
-            <img class="elements__item-img">
-            <button type="button" class="elements__item-delete"></button>
-            <div class="elements__description">
-              <h2 class="elements__item-title"></h2>
-              <button type="button" class="elements__item-like"></button>
-            </div>
-          </li>
+      <img class="elements__item-img">
+      <button type="button" class="elements__item-delete"></button>
+      <div class="elements__description">
+        <h2 class="elements__item-title"></h2>
+        <button type="button" class="elements__item-like"></button>
+      </div>
+    </li>
   </template>
 
   <script src="./scripts/script.js"></script>
