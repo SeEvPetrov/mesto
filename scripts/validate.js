@@ -1,4 +1,4 @@
-'use strict';
+' use strict ';
 
 // функция которая будет показывать ошибку в поле инпута
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {

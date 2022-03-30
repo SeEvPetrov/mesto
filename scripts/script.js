@@ -1,4 +1,4 @@
-'use strict';
+' use strict ';
 
 const initialCards = [{
     name: 'Архыз',
@@ -70,8 +70,9 @@ function closePopup(popup) {
 
 // закрытие модального окна по кнопке ESC
 const handleEscUp = (evt) => {
-  const activePop = document.querySelector('.popup_opened');
+
   if (evt.key === 'Escape') {
+    const activePop = document.querySelector('.popup_opened');
     closePopup(activePop);
   }
 };
@@ -179,9 +180,9 @@ const addCards = (arrayCards) => {
 };
 
 
-const inputResetError = () => {
-  const erorList = document.querySelectorAll('.popup__input-error');
-  const inputList = document.querySelectorAll('.popup__input');
+const inputResetError = (form) => {
+  const erorList = form.querySelectorAll('.popup__input-error');
+  const inputList = form.querySelectorAll('.popup__input');
 
   inputList.forEach((element) => {
     element.classList.remove('popup__input_type_error');
@@ -194,11 +195,8 @@ const inputResetError = () => {
 };
 
 // очищаем формы
-const resetForm = () => {
-  const formList = document.querySelectorAll('.popup__form');
-  formList.forEach((form) => {
+const resetForm = (form) => {
     form.reset();
-  });
 };
 
 addCards(initialCards);
@@ -207,26 +205,26 @@ setEventCloseOverlay(popup);
 // обработчик на кнопку открытия модального окна
 popupOpenEdit.addEventListener("click", () => {
   setDataInput();
-  inputResetError();
+  inputResetError(profileForm);
 });
 
 popupOpenAdd.addEventListener("click", () => {
   openPopup(popupAdd);
-  inputResetError();
-  resetForm();
+  inputResetError(formAdd);
+  resetForm(formAdd);
 });
 
 // обработчик на кнопку закрытия модального окна
 popupCloseEdit.addEventListener("click", () => {
   closePopup(popupEdit);
-  inputResetError();
-  resetForm();
+  inputResetError(profileForm);
+  resetForm(profileForm);
 });
 
 popupCloseAdd.addEventListener("click", () => {
   closePopup(popupAdd);
-  inputResetError();
-  resetForm();
+  inputResetError(formAdd);
+  resetForm(formAdd);
 });
 
 popupZoomClose.addEventListener("click", () => closePopup(popupZoom));

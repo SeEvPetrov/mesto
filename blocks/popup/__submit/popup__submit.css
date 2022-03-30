@@ -14,10 +14,6 @@
   cursor: pointer;
 }
 
-.popup__submit:hover {
-  opacity: 0.8;
-}
-
 @media (max-width: 581px) {
   .popup__submit {
     font-size: 14px;
