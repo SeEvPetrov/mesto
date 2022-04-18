@@ -1,8 +1,10 @@
 'use strict';
 
-import Card  from './Card.js';
+import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import { initialCards } from './initialCards.js';
+import {
+  initialCards
+} from './initialCards.js';
 
 const validationObj = {
   formSelector: '.popup__form',
@@ -13,46 +15,29 @@ const validationObj = {
   errorClass: 'popup__input-error_active'
 };
 
-const popup = document.querySelectorAll(".popup");
+const popups = document.querySelectorAll(".popup");
 const popupOpenEdit = document.querySelector(".profile__edit-button");
 const popupOpenAdd = document.querySelector(".profile__add-button");
 const popupEdit = document.querySelector(".popup_edit");
 const popupAdd = document.querySelector(".popup_add");
-const popupCloseEdit = popupEdit.querySelector(".popup__button-close");
-const popupCloseAdd = popupAdd.querySelector(".popup__button-close");
-export const popupZoom = document.querySelector(".popup_zoom");
-export const popupZoomImage = document.querySelector(".popup__zoom-image");
-export const popupZoomCaption = document.querySelector(".popup__caption");
-const  popupZoomClose = popupZoom.querySelector(".popup__button-close");
-const  profileForm = document.querySelector(".form-edit");
+const popupZoom = document.querySelector(".popup_zoom");
+const popupZoomImage = document.querySelector(".popup__zoom-image");
+const popupZoomCaption = document.querySelector(".popup__caption");
+const popupZoomClose = popupZoom.querySelector(".popup__button-close");
+const profileForm = document.querySelector(".form-edit");
 const formAdd = document.querySelector(".form-add");
-const  userName = document.querySelector(".profile__name");
-const  userJob = document.querySelector(".profile__job");
+const userName = document.querySelector(".profile__name");
+const userJob = document.querySelector(".profile__job");
 const nameInput = document.querySelector(".popup__input_type_name");
-const  jobInput = document.querySelector(".popup__input_type_job");
-const  titleInput = document.querySelector(".popup__input_type_title");
-const  urlInput = document.querySelector(".popup__input_type_url");
-const  cardsContainer = document.querySelector('.elements__list');
+const jobInput = document.querySelector(".popup__input_type_job");
+const titleInput = document.querySelector(".popup__input_type_title");
+const urlInput = document.querySelector(".popup__input_type_url");
+const cardsContainer = document.querySelector('.elements__list');
 
 const formValidateProfile = new FormValidator(validationObj, profileForm);
 const formVAlidateAdd = new FormValidator(validationObj, formAdd);
 
-// Добавление карточки на страницу
-const renderCard = (data, cardsContainer) => {
-  // Создаем карточку на основе данных
-  const card = new Card(data, '.card');
 
-  const cardElement = card.generateCard();
-  // Помещаем ее в контейнер карточек
-  cardsContainer.prepend(cardElement);
-};
-
-//Добавление карточек на основе массива
-const addCards = (arrayCards) => {
-  arrayCards.forEach((card) => {
-    renderCard(card, cardsContainer);
-  });
-};
 // функция которая будет заполнять input данными со страницы
 function setDataInput() {
   nameInput.value = userName.textContent; //в input модального окна заносим данные со страницы
@@ -98,6 +83,14 @@ const setEventCloseOverlay = (popupList) => {
   });
 };
 
+export function handleCardClick(name, link) {
+  popupZoomImage.src = this._link;
+  popupZoomImage.alt = this._name;
+  popupZoomCaption.textContent = this._name;
+
+  openPopup(popupZoom);
+}
+
 // отменим стандартное поведение формы, получаем данные из input
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -109,65 +102,67 @@ function handleProfileFormSubmit(evt) {
 }
 
 // слушатель форму добавления карточки
-const handleFormAddSubmit = (evt) => {
+function handleFormAddSubmit(evt) {
   evt.preventDefault();
 
-  renderCard({
+  const card = {
     name: titleInput.value,
     link: urlInput.value
-  }, cardsContainer);
+  };
 
+  renderCard(card, cardsContainer);
   evt.target.reset();
-
   closePopup(popupAdd);
-};
+}
 
-const inputResetError = (form) => {
-  const erorList = form.querySelectorAll('.popup__input-error');
-  const inputList = form.querySelectorAll('.popup__input');
+// Добавление карточки на страницу
+function renderCard(dataCard, cardsContainer) {
+  cardsContainer.prepend(createCard(dataCard));
+}
 
-  inputList.forEach((element) => {
-    element.classList.remove('popup__input_type_error');
+function createCard(dataCard) {
+  const card = new Card(dataCard, '.card', handleCardClick);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+//Добавление карточек на основе массива
+function addCards(arrayCards) {
+  arrayCards.forEach((card) => {
+    renderCard(card, cardsContainer);
   });
-
-  erorList.forEach((element) => {
-    element.classList.remove('popup__input_type_error');
-    element.textContent = '';
-  });
-};
+}
 
 // очищаем формы
 const resetForm = (form) => {
-    form.reset();
+  form.reset();
 };
 
 formValidateProfile.enableValidation();
 formVAlidateAdd.enableValidation();
 
 addCards(initialCards);
-setEventCloseOverlay(popup);
+setEventCloseOverlay(popups);
 
 // обработчик на кнопку открытия модального окна
 popupOpenEdit.addEventListener("click", () => {
   setDataInput();
-  inputResetError(profileForm);
+  formValidateProfile.resetValidation();
 });
 
 popupOpenAdd.addEventListener("click", () => {
   openPopup(popupAdd);
-  inputResetError(formAdd);
+  formVAlidateAdd.resetValidation();
   resetForm(formAdd);
 });
 
-// обработчик на кнопку закрытия модального окна
-popupCloseEdit.addEventListener("click", () => {
-  closePopup(popupEdit);
-  resetForm(profileForm);
-});
-
-popupCloseAdd.addEventListener("click", () => {
-  closePopup(popupAdd);
-  resetForm(formAdd);
+// Закрытие попапов по крестику
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup__button-close')) {
+      closePopup(popup);
+    }
+  });
 });
 
 popupZoomClose.addEventListener("click", () => closePopup(popupZoom));

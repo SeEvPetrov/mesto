@@ -1,12 +1,16 @@
 'use strict';
 
-import { popupZoom, popupZoomImage, popupZoomCaption } from './index.js';
+import {
+  handleCardClick,
+  openPopup
+} from './index.js';
 
 export default class Card {
-  constructor (data, cardSelector) {
-    this._link = data.link;
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
+    this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -33,25 +37,16 @@ export default class Card {
     return this._element;
   }
 
-  _toggleLike () {
+  _toggleLike() {
     this._element.querySelector('.elements__item-like').classList.toggle('elements__item-like_active');
   }
 
-  _handleDeleteCard () {
+  _handleDeleteCard() {
     this._element.remove();
     this._element = null;
   }
 
-  _setImageClickHandler () {
-
-    popupZoomImage.src = this._link;
-    popupZoomImage.alt = this._name;
-    popupZoomCaption.textContent = this._name;
-
-    openPopup(popupZoom);
-  }
-
-  _setEventListeners () {
+  _setEventListeners() {
     this._element.querySelector('.elements__item-like').addEventListener('click', () => {
       this._toggleLike();
     });
@@ -61,7 +56,8 @@ export default class Card {
     });
 
     this._element.querySelector('.elements__item-img').addEventListener('click', () => {
-      this._setImageClickHandler();
+      this._handleCardClick(this._name, this._link);
     });
+
   }
 }
