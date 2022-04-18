@@ -1,5 +1,4 @@
-' use strict';
-
+'use strict';
 
 import { popupZoom, popupZoomImage, popupZoomCaption } from './index.js';
 

@@ -1,5 +1,4 @@
-' use strict';
-
+'use strict';
 
 export default class FormValidator {
   constructor (data, form) {
@@ -7,7 +6,7 @@ export default class FormValidator {
     this._form = form;
   }
 // показываем ошибку
-  _showInputError (inputElement) {
+  _showInputError(inputElement) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
 
     inputElement.classList.add(this._data.inputErrorClass);
@@ -15,29 +14,20 @@ export default class FormValidator {
     errorElement.classList.add(this._data.errorClass);
   }
 // скрываем ошибку
-  _hideInputError (inputElement) {
+  _hideInputError(inputElement) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._data.inputErrorClass);
     errorElement.classList.remove(this._data.errorClass);
     errorElement.textContent = '';
   }
 
-  // валидируем инпут
-  _checkInputValidity (inputElement) {
-    if (!inputElement.validity.valid) {
-      this._showInputError(inputElement);
-    } else {
-      this._hideInputError(inputElement);
-    }
-  }
-
-  _hasInvalidInput () {
+  _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
-  _toggleButtonState () {
+  _toggleButtonState() {
     this._buttonElement = this._form.querySelector(this._data.submitButtonSelector);
 
     if (this._hasInvalidInput(this._inputList)) {
@@ -49,14 +39,23 @@ export default class FormValidator {
     }
   }
 
-  enableValidation () {
+  // валидируем инпут
+  _checkInputValidity(inputElement) {
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement);
+    } else {
+      this._hideInputError(inputElement);
+    }
+  }
+
+  enableValidation() {
     this._inputList = Array.from(this._form.querySelectorAll(this._data.inputSelector));
     this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', function () {
-        checkInputValidity(inputElement);
-        toggleButtonState();
+      inputElement.addEventListener('input', () => {
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState();
       });
     });
   }
