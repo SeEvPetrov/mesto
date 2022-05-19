@@ -1,38 +1,35 @@
-'use strict';
+' use strict';
 
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import {
   initialCards
 } from './initialCards.js';
+import validationObj from '../utils/validationObj.js';
+import Popup from '../components/Popup.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import {
+  popups,
+  popupOpenEdit,
+  popupOpenAdd,
+  opupEdit,
+  popupAdd,
+  popupZoom,
+  popupZoomImage,
+  popupZoomCaption,
+  popupZoomClose,
+  profileForm,
+  formAdd,
+  userName,
+  userJob,
+  nameInput,
+  jobInput,
+  titleInput,
+  urlInput,
+  cardsContainer
+} from '../utils/constants';
 
-const validationObj = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-};
-
-const popups = document.querySelectorAll(".popup");
-const popupOpenEdit = document.querySelector(".profile__edit-button");
-const popupOpenAdd = document.querySelector(".profile__add-button");
-const popupEdit = document.querySelector(".popup_edit");
-const popupAdd = document.querySelector(".popup_add");
-const popupZoom = document.querySelector(".popup_zoom");
-const popupZoomImage = document.querySelector(".popup__zoom-image");
-const popupZoomCaption = document.querySelector(".popup__caption");
-const popupZoomClose = popupZoom.querySelector(".popup__button-close");
-const profileForm = document.querySelector(".form-edit");
-const formAdd = document.querySelector(".form-add");
-const userName = document.querySelector(".profile__name");
-const userJob = document.querySelector(".profile__job");
-const nameInput = document.querySelector(".popup__input_type_name");
-const jobInput = document.querySelector(".popup__input_type_job");
-const titleInput = document.querySelector(".popup__input_type_title");
-const urlInput = document.querySelector(".popup__input_type_url");
-const cardsContainer = document.querySelector('.elements__list');
 
 const formValidateProfile = new FormValidator(validationObj, profileForm);
 const formVAlidateAdd = new FormValidator(validationObj, formAdd);
