@@ -1,10 +1,5 @@
 ' use strict';
 
-import {
-  handleCardClick,
-  openPopup
-} from './index.js';
-
 export default class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;

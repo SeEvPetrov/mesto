@@ -8,7 +8,7 @@ export default class Section {
   renderer() {
     this._items.forEach(item => {
       const element = this._renderer(item);
-      this._addItem(element);
+      this.addItem(element);
     });
   }
 
