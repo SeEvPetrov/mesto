@@ -4,6 +4,8 @@ export default class FormValidator {
   constructor(data, form) {
     this._data = data;
     this._form = form;
+
+    this._buttonElement = this._form.querySelector(this._data.submitButtonSelector);
   }
   // показываем ошибку
   _showInputError(inputElement) {
@@ -28,8 +30,6 @@ export default class FormValidator {
   }
 
   _toggleButtonState() {
-    this._buttonElement = this._form.querySelector(this._data.submitButtonSelector);
-
     if (this._hasInvalidInput(this._inputList)) {
       this._buttonElement.classList.add(this._data.inactiveButtonClass);
       this._buttonElement.setAttribute('disabled', true);
