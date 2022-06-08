@@ -1,6 +1,7 @@
 export const popups = document.querySelectorAll(".popup");
 export const popupOpenEdit = document.querySelector(".profile__edit-button");
 export const popupOpenAdd = document.querySelector(".profile__add-button");
+export const popupOpenEditAvatar = document.querySelector(".profile__edit-avatar");
 export const popupEdit = document.querySelector(".popup_edit");
 export const popupAdd = document.querySelector(".popup_add");
 export const popupZoom = document.querySelector(".popup_zoom");
@@ -15,4 +16,5 @@ export const nameInput = document.querySelector(".popup__input_type_name");
 export const jobInput = document.querySelector(".popup__input_type_job");
 export const titleInput = document.querySelector(".popup__input_type_title");
 export const urlInput = document.querySelector(".popup__input_type_url");
+export const avatarInput = document.querySelector(".popup__input_type_card-link");
 export const cardsContainer = document.querySelector('.elements__list');

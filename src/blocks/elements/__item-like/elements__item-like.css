@@ -1,7 +1,7 @@
 .elements__item-like {
-  width: 22px;
+  width: 23px;
   height: 19px;
-  margin: 5px 5px 0 0;
+  margin: 0 5px 3px;
   background: url(../../../images/heart_img.svg) no-repeat center;
   padding: 0;
   border: 0;
@@ -12,5 +12,3 @@
 .elements__item-like:hover {
   opacity: 0.5;
 }
-
-

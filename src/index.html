@@ -17,7 +17,9 @@
     <main>
       <section class="profile">
         <div class="profile__container">
-          <img src="<%=require('./images/image.jpg')%>" alt="" class="profile__avatar">
+          <button class="profile__edit-avatar">
+            <img src="<%=require('./images/image.jpg')%>" alt="" class="profile__avatar">
+          </button>
           <div class="profile__info">
             <div class="profile__personal">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -52,9 +54,9 @@
             <span class="popup__input-error" id="name-error"></span>
           </label>
           <label class="popup__form-field">
-            <input type="text" name="job" id="job" class="popup__input popup__input_type_job" required
+            <input type="text" name="about" id="about" class="popup__input popup__input_type_job" required
               placeholder="Введите профессию" autocomplete="off" minlength="2" maxlength="200">
-            <span class="popup__input-error" id="job-error"></span>
+            <span class="popup__input-error" id="about-error"></span>
           </label>
           <button type="submit" class="popup__submit popup__submit_type_edit">Сохранить</button>
         </fieldset>
@@ -96,6 +98,39 @@
     </div>
   </div>
 
+  <!-- Модальное окно удаления карточки при клике -->
+  <div class="popup popup_confirm-delete">
+    <div class="popup__close-container">
+      <button aria-label="Закрыть" class="popup__button-close" type="button"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form class="popup__form" name="form-confirm-delete">
+        <button class="popup__submit" type="submit" id="delete-button">
+          Да
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Модальное окно загрузки аватара пользователя -->
+  <div class="popup popup_add-avatar">
+    <div class="popup__avatar-container">
+      <button class="popup__button-close" type="button" aria-label="Кнопка закрытия карточки"></button>
+      <form action="#" class="popup__form edit-avatar" name="editAvatar" novalidate>
+        <fieldset class="popup__form-set">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <label class="popup__form-field">
+            <input type="url" name="link" placeholder="Ссылка на картинку" autocomplete="off"
+              class="popup__input popup__input_type_card-link" id="reference" required />
+            <span class="popup__input-error" id="reference-error"></span>
+          </label>
+          <button type="submit" class="popup__submit popup__submit_type_add">
+            Сохранить
+          </button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
   <!-- заготовленая карточка -->
   <template class="card">
     <li class="elements__item">
@@ -103,12 +138,14 @@
       <button type="button" class="elements__item-delete"></button>
       <div class="elements__description">
         <h2 class="elements__item-title"></h2>
-        <button type="button" class="elements__item-like"></button>
+        <div class="elements__like_container">
+          <button type="button" class="elements__item-like"></button>
+          <span class="elements__number-like">0</span>
+        </div>
       </div>
     </li>
   </template>
 
-  <script type="module" src="./pages/index.js"></script>
 </body>
 
 </html>

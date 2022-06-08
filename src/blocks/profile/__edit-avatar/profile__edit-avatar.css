@@ -1,0 +1,33 @@
+.profile__edit-avatar {
+  position: relative;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.profile__edit-avatar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgb(0 0 0 / 80%) url(../../../images/correct_img.svg) no-repeat
+    center;
+  background-size: 26px 26px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+.profile__edit-avatar:hover::after {
+  opacity: 1;
+}
+
+/* @media (max-width: 710px) {
+  .profile__edit-avatar::after {
+    top: 20px;
+  }
+} */
