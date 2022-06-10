@@ -10,6 +10,7 @@ export const popupZoomCaption = document.querySelector(".popup__caption");
 export const popupZoomClose = popupZoom.querySelector(".popup__button-close");
 export const profileForm = document.querySelector(".form-edit");
 export const formAdd = document.querySelector(".form-add");
+export const formAvatar = document.querySelector(".edit-avatar");
 export const userName = document.querySelector(".profile__name");
 export const userJob = document.querySelector(".profile__job");
 export const nameInput = document.querySelector(".popup__input_type_name");

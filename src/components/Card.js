@@ -1,11 +1,12 @@
 ' use strict';
 
 export default class Card {
-  constructor({name, link}, cardSelector, handleCardClick) {
+  constructor({name, link, _id }, cardSelector, handleCardClick, handleDeleteIconClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteIconClick = handleDeleteIconClick;
   }
 
   _getTemplate() {
