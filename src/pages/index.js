@@ -76,6 +76,17 @@ const handleDeleteIconClick = (card) => {
   popupDeleteCard.getIdCard(card);
 };
 
+const handleLikeClick = (card, like) => {
+  const cardLike = like ? api.deleteLike(card._id) : api.setLike(card._id);
+    cardLike
+      .then(() => {
+        card.putLike(like);
+        console.log(card._id);
+      }).catch((err) => {
+        console.log(`Неудачная попытка поставить лайк. ${err}`);
+      });
+};
+
 const popupDeleteCard = new PopupWithConfirm('.popup_confirm-delete', (cardId) => {
   api
     .deleteCard(cardId)
@@ -90,8 +101,9 @@ const popupDeleteCard = new PopupWithConfirm('.popup_confirm-delete', (cardId) =
 
 // Добавление карточки на страницу
 const renderCard = (data) => {
-  const card = new Card(data, '.card', userData.id, handleCardClick, handleDeleteIconClick);
+  const card = new Card(data, '.card', userData.id, handleCardClick, handleDeleteIconClick, handleLikeClick);
   const cardElement = card.generateCard();
+  console.log(data);
   return cardElement;
 };
 
