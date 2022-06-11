@@ -5,6 +5,7 @@ import FormValidator from '../components/FormValidator.js';
 import validationObj from '../utils/validationObj.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
@@ -70,14 +71,26 @@ const handleCardClick = (name, link) => {
   popupZoomImg.open(name, link);
 };
 
-const handleDeleteIconClick = () => {
-  
+const handleDeleteIconClick = (card) => {
+  popupDeleteCard.open();
+  popupDeleteCard.getIdCard(card);
 };
+
+const popupDeleteCard = new PopupWithConfirm('.popup_confirm-delete', (cardId) => {
+  api
+    .deleteCard(cardId)
+    .then(()=> {
+      popupDeleteCard._card.handleDeleteCard();
+      popupDeleteCard.close();
+    }).catch((res) => {
+      console.log(res);
+    });
+});
 
 
 // Добавление карточки на страницу
 const renderCard = (data) => {
-  const card = new Card(data, '.card', handleCardClick);
+  const card = new Card(data, '.card', userData.id, handleCardClick, handleDeleteIconClick);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -152,7 +165,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
 
 
-
+popupDeleteCard.setEventListeners();
 popupZoomImg.setEventListeners();
 popupAddCard.setEventListeners();
 popupProfile.setEventListeners();

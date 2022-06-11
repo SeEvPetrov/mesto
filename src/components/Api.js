@@ -69,6 +69,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     }).then((res) => {
+      console.log(cardId);
       return this.checkError(res);
     });
   }
