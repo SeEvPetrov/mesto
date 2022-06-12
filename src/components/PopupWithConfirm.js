@@ -3,10 +3,10 @@
 import Popup from './Popup.js';
 
 export default class PopupWithConfirm extends Popup {
-  constructor(popupSelector, handleFormSubmit) {
+  constructor(popupSelector) {
     super(popupSelector);
     this._deleteBtn = this._popupSelector.querySelector('.popup__submit');
-    this._handleFormSubmit = handleFormSubmit;
+    // this._handleFormSubmit = handleFormSubmit;
   }
 
   setEventListeners() {
@@ -14,14 +14,12 @@ export default class PopupWithConfirm extends Popup {
 
     this._deleteBtn.addEventListener('click', (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit(this._id);
+      this._action();
       this.close();
     });
   }
 
-  getIdCard(card) {
-    this._id = card._id;
-    this._card = card;
+  setAction(func) {
+    this._action = func;
   }
-
 }

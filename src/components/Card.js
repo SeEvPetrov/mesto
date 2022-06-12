@@ -1,7 +1,13 @@
 ' use strict';
 
 export default class Card {
-  constructor({name, link, _id, owner, likes }, cardSelector, userId, handleCardClick, handleDeleteIconClick, handleLikeClick) {
+  constructor({
+    name,
+    link,
+    _id,
+    owner,
+    likes
+  }, cardSelector, userId, handleCardClick, handleDeleteIconClick, handleLikeClick) {
     this._name = name;
     this._link = link;
     this._id = _id;
@@ -36,7 +42,7 @@ export default class Card {
     cardImage.alt = this._name;
 
     this._element.querySelector('.elements__item-title').textContent = this._name;
-    this._element.querySelector('.elements__number-like').textContent = this._likes.length;
+    this._element.querySelector('.elements__quantity-like').textContent = this._likes.length;
 
     if (this._owner._id !== this._userId) {
       this._element.querySelector('.elements__item-delete').remove();
@@ -49,14 +55,18 @@ export default class Card {
     return this._element;
   }
 
+  getIdCard() {
+    return this._id;
+  }
+
   putLike(like) {
     const btnLike = this._element.querySelector('.elements__item-like');
     if (!like) {
       btnLike.classList.add('elements__item-like_active');
-      this._element.querySelector('.elements__number-like').textContent = this._likesLength += 1;
+      this._element.querySelector('.elements__quantity-like').textContent = this._likesLength += 1;
     } else {
       btnLike.classList.remove('elements__item-like_active');
-      this._element.querySelector('.elements__number-like').textContent = this._likesLength -= 1;
+      this._element.querySelector('.elements__quantity-like').textContent = this._likesLength -= 1;
     }
   }
 
