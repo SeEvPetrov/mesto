@@ -1,5 +1,4 @@
 export default class UserInfo {
-
   constructor({
     name,
     about,

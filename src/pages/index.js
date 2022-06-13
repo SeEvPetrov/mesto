@@ -1,5 +1,6 @@
 ' use strict';
 
+// импорт классов
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import validationObj from '../utils/validationObj.js';
@@ -22,8 +23,10 @@ import {
   jobInput,
 } from '../utils/constants.js';
 
+// импорт css
 import './index.css';
 
+// создание класса Api
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-43/',
   headers: {
@@ -31,6 +34,15 @@ const api = new Api({
     'Content-Type': 'application/json'
   },
 });
+
+//Общий запрос на добавление данных пользователя и карточек
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userInfo, userCard]) => {
+    handleUserInfo(userInfo);
+    cardsContainer.rendered(userCard);
+  }).catch((err) => {
+    console.log(`Упс..Ошибка ${err}`);
+  });
 
 // получаем данные пользователя
 const handleUserInfo = (data) => {
@@ -49,7 +61,7 @@ const userData = new UserInfo({
 
 // Создаем экземпляр карточки
 const renderCard = (data) => {
-  const card = new Card(data, '.card', userData.id, handleCardClick, handleDeleteIconClick, handleLikeClick);
+  const card = new Card(data, '.card', userData.id, handleCardClick, handleDeleteIconClick, handleLikeClick, api);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -88,14 +100,8 @@ const handleDeleteIconClick = (card) => {
 const popupDeleteCard = new PopupWithConfirm('.popup_confirm-delete');
 
 // функция для постановки и снятия лайка
-const handleLikeClick = (card, like) => {
-  const cardLike = like ? api.deleteLike(card._id) : api.setLike(card._id);
-  cardLike
-    .then(() => {
-      card.putLike(like);
-    }).catch((err) => {
-      console.log(`Неудачная попытка поставить лайк. ${err}`);
-    });
+const handleLikeClick = (card) => {
+  card.handleLikeCard();
 };
 
 // меняем текст на кнопке, пока выполняется запрос
@@ -134,7 +140,6 @@ const popupAddCard = new PopupWithForm('.popup_add', (data) => {
     .finally(() => {
       renderLoading('.popup_add', false);
     });
-
 });
 
 // Редактирование карточки профиля
@@ -169,14 +174,6 @@ const popupAvatar = new PopupWithForm('.popup_add-avatar', (data) => {
     });
 });
 
-//Общий запрос на добавление данных пользователя и карточек
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([userInfo, userCard]) => {
-    handleUserInfo(userInfo);
-    cardsContainer.rendered(userCard);
-  }).catch((err) => {
-    console.log(`Упс..Ошибка ${err}`);
-  });
 
 // слушатели
 popupDeleteCard.setEventListeners();
