@@ -14,7 +14,6 @@ export default class PopupWithConfirm extends Popup {
     this._deleteBtn.addEventListener('click', (evt) => {
       evt.preventDefault();
       this._action();
-      this.close();
     });
   }
 

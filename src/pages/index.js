@@ -61,7 +61,7 @@ const userData = new UserInfo({
 
 // Создаем экземпляр карточки
 const renderCard = (data) => {
-  const card = new Card(data, '.card', userData.id, handleCardClick, handleDeleteIconClick, handleLikeClick, api);
+  const card = new Card(data, '.card', userData.id, handleCardClick, handleDeleteIconClick, handleLikeClick);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -100,8 +100,14 @@ const handleDeleteIconClick = (card) => {
 const popupDeleteCard = new PopupWithConfirm('.popup_confirm-delete');
 
 // функция для постановки и снятия лайка
-const handleLikeClick = (card) => {
-  card.handleLikeCard();
+const handleLikeClick = (card, statusLike) => {
+  const cardLike = statusLike ? api.deleteLike(card._id) : api.setLike(card._id);
+    cardLike
+      .then(() => {
+        card.handleLikeCard(statusLike);
+      }).catch((err) => {
+        console.log(`Не получилось добавить/снять лайк. Ошибка: ${err}`);
+      });
 };
 
 // меняем текст на кнопке, пока выполняется запрос
